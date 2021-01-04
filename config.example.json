@@ -108,7 +108,7 @@
 	},
 
 	"newrelicEnabled": false,
-	"newrelicName": "MyEtherProxy",
+	"newrelicName": "MyVaporProxy",
 	"newrelicKey": "SECRET_KEY",
 	"newrelicVerbose": false
 }

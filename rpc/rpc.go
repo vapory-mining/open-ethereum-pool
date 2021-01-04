@@ -12,9 +12,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/vaporyco/go-vapory/common"
 
-	"github.com/sammy007/open-ethereum-pool/util"
+	"github.com/vapory-mining/open-vapory-pool/util"
 )
 
 type RPCClient struct {
@@ -37,7 +37,7 @@ type GetBlockReply struct {
 	GasUsed      string   `json:"gasUsed"`
 	Transactions []Tx     `json:"transactions"`
 	Uncles       []string `json:"uncles"`
-	// https://github.com/ethereum/EIPs/issues/95
+	// https://github.com/vaporyco/EIPs/issues/95
 	SealFields []string `json:"sealFields"`
 }
 
@@ -224,9 +224,9 @@ func (r *RPCClient) SendTransaction(from, to, gas, gasPrice, value string, autoG
 	if err != nil {
 		return reply, err
 	}
-	/* There is an inconsistence in a "standard". Geth returns error if it can't unlock signer account,
+	/* There is an inconsistence in a "standard". Gvap returns error if it can't unlock signer account,
 	 * but Parity returns zero hash 0x000... if it can't send tx, so we must handle this case.
-	 * https://github.com/ethereum/wiki/wiki/JSON-RPC#returns-22
+	 * https://github.com/vaporyco/wiki/wiki/JSON-RPC#returns-22
 	 */
 	if util.IsZeroHash(reply) {
 		err = errors.New("transaction is not yet available")

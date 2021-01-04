@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/vaporyco/go-vapory/common/math"
 
-	"github.com/sammy007/open-ethereum-pool/rpc"
-	"github.com/sammy007/open-ethereum-pool/storage"
-	"github.com/sammy007/open-ethereum-pool/util"
+	"github.com/vapory-mining/open-vapory-pool/rpc"
+	"github.com/vapory-mining/open-vapory-pool/storage"
+	"github.com/vapory-mining/open-vapory-pool/util"
 )
 
 type UnlockerConfig struct {
@@ -92,12 +92,12 @@ type UnlockResult struct {
 	blocks         int
 }
 
-/* Geth does not provide consistent state when you need both new height and new job,
+/* Gvap does not provide consistent state when you need both new height and new job,
  * so in redis I am logging just what I have in a pool state on the moment when block found.
  * Having very likely incorrect height in database results in a weird block unlocking scheme,
  * when I have to check what the hell we actually found and traversing all the blocks with height-N and height+N
  * to make sure we will find it. We can't rely on round height here, it's just a reference point.
- * ISSUE: https://github.com/ethereum/go-ethereum/issues/2333
+ * ISSUE: https://github.com/vaporyco/go-vapory/issues/2333
  */
 func (u *BlockUnlocker) unlockCandidates(candidates []*storage.BlockData) (*UnlockResult, error) {
 	result := &UnlockResult{}
@@ -192,11 +192,11 @@ func matchCandidate(block *rpc.GetBlockReply, candidate *storage.BlockData) bool
 	if len(candidate.Hash) > 0 && strings.EqualFold(candidate.Hash, block.Hash) {
 		return true
 	}
-	// Geth-style candidate matching
+	// Gvap-style candidate matching
 	if len(block.Nonce) > 0 {
 		return strings.EqualFold(block.Nonce, candidate.Nonce)
 	}
-	// Parity's EIP: https://github.com/ethereum/EIPs/issues/95
+	// Parity's EIP: https://github.com/vaporyco/EIPs/issues/95
 	if len(block.SealFields) == 2 {
 		return strings.EqualFold(candidate.Nonce, block.SealFields[1])
 	}

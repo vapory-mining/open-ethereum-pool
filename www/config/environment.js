@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'open-ethereum-pool',
+    modulePrefix: 'open-vapory-pool',
     environment: environment,
     rootURL: '/',
     locationType: 'hash',
@@ -27,7 +27,7 @@ module.exports = function(environment) {
 
       // Fee and payout details
       PoolFee: '1%',
-      PayoutThreshold: '0.5 Ether',
+      PayoutThreshold: '0.5 Vapor',
 
       // For network hashrate (change for your favourite fork)
       BlockTime: 14.4

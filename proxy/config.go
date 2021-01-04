@@ -1,10 +1,10 @@
 package proxy
 
 import (
-	"github.com/sammy007/open-ethereum-pool/api"
-	"github.com/sammy007/open-ethereum-pool/payouts"
-	"github.com/sammy007/open-ethereum-pool/policy"
-	"github.com/sammy007/open-ethereum-pool/storage"
+	"github.com/vapory-mining/open-vapory-pool/api"
+	"github.com/vapory-mining/open-vapory-pool/payouts"
+	"github.com/vapory-mining/open-vapory-pool/policy"
+	"github.com/vapory-mining/open-vapory-pool/storage"
 )
 
 type Config struct {
