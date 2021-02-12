@@ -17,7 +17,7 @@
 
 #### Proxies
 
-* [Http-Proxy](https://github.com/vapory-mining/vapory-http-proxy) HTTP proxy with web interface
+* [Http-Proxy](https://github.com/vapory-mining/vapor-http-proxy) HTTP proxy with web interface
 * [Stratum Proxy](https://github.com/vapory-mining/vapory-stratum-proxy) for Vapory
 
 ### Building on Linux
