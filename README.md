@@ -105,7 +105,7 @@ otherwise you will get errors on start because of JSON comments.**
   // Set to the number of CPU cores of your server
   "threads": 2,
   // Prefix for keys in redis store
-  "coin": "eth",
+  "coin": "vap",
   // Give unique name to each instance
   "name": "main",
 
@@ -305,7 +305,7 @@ I recommend this deployment strategy:
 
 ### Alternative Vapory Implementations
 
-This pool is tested to work with [Ethcore's Parity](https://github.com/ethcore/parity). Mining and block unlocking works, but I am not sure about payouts and suggest to run *official* gvap node for payments.
+This pool is tested to work with [OpenVapory](https://github.com/openvapory/openvapory). Mining and block unlocking works, but I am not sure about payouts and suggest to run *official* gvap node for payments.
 
 ### Credits
 
@@ -315,10 +315,3 @@ Made by sammy007. Licensed under GPLv3.
 
 [Alex Leverington](https://github.com/subtly)
 
-### Donations
-
-VAP/ETH: 0x5e7d4ab47b6f44d7ba5dc8777bd2fb6c9a1671b9
-
-![](https://cdn.pbrd.co/images/GP5tI1D.png)
-
-Highly appreciated.

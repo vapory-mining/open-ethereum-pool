@@ -21,7 +21,7 @@ If any of checks fails, module will not even try to continue.
 If payments can't be locked (another lock exist, usually after a failure) module will halt payouts.
 
 * Deduct balance of a miner and log pending payment
-* Submit a transaction to a node via `eth_sendTransaction`
+* Submit a transaction to a node via `vap_sendTransaction`
 
 **If transaction submission fails, payouts will remain locked and halted in erroneous state.**
 
@@ -40,11 +40,11 @@ If your payout is not logged and not confirmed by Vapory network you can resolve
 
 `RESOLVE_PAYOUT=1 ./build/bin/open-vapory-pool payouts.json`.
 
-Payout module will fetch all rows from Redis with key `eth:payments:pending` and credit balance back to miners. Usually you will have only single entry there.
+Payout module will fetch all rows from Redis with key `vap:payments:pending` and credit balance back to miners. Usually you will have only single entry there.
 
 If you see `No pending payments to resolve` we have no data about failed debits.
 
-If there was a debit operation performed which is not followed by actual money transfer (after `eth_sendTransaction` returned an error), you will likely see:
+If there was a debit operation performed which is not followed by actual money transfer (after `vap_sendTransaction` returned an error), you will likely see:
 
 ```
 Will credit back following balances:
@@ -75,7 +75,7 @@ You can perform manual maintenance using `gvap` and `redis-cli` utilities.
 Perform the following command in a `redis-cli`:
 
 ```
-ZREVRANGE "eth:payments:pending" 0 -1 WITHSCORES
+ZREVRANGE "vap:payments:pending" 0 -1 WITHSCORES
 ```
 
 Result will be like this:
@@ -93,8 +93,8 @@ It's a `UNIXTIME`
 **Make sure there is no TX sent using block explorer. Skip this step if payment actually exist in a blockchain.**
 
 ```javascript
-eth.sendTransaction({
-  from: eth.coinbase,
+vap.sendTransaction({
+  from: vap.coinbase,
   to: '0xb85150eb365e7df0941f0cf08235f987ba91506a',
   value: web3.toWei(25000000, 'shannon')
 })
@@ -109,30 +109,30 @@ eth.sendTransaction({
 Also usable for fixing missing payment entries.
 
 ```
-ZADD "eth:payments:all" 1462920526 0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331:0xb85150eb365e7df0941f0cf08235f987ba91506a:25000000
+ZADD "vap:payments:all" 1462920526 0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331:0xb85150eb365e7df0941f0cf08235f987ba91506a:25000000
 ```
 
 ```
-ZADD "eth:payments:0xb85150eb365e7df0941f0cf08235f987ba91506a" 1462920526 0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331:25000000
+ZADD "vap:payments:0xb85150eb365e7df0941f0cf08235f987ba91506a" 1462920526 0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331:25000000
 ```
 
 ### Delete Erroneous Payment Entry
 
 ```
-ZREM "eth:payments:pending" "0xb85150eb365e7df0941f0cf08235f987ba91506a:25000000"
+ZREM "vap:payments:pending" "0xb85150eb365e7df0941f0cf08235f987ba91506a:25000000"
 ```
 
 ### Update Internal Stats
 
 ```
-HINCRBY "eth:finances" pending -25000000
-HINCRBY "eth:finances" paid 25000000
+HINCRBY "vap:finances" pending -25000000
+HINCRBY "vap:finances" paid 25000000
 ```
 
 ### Unlock Payouts
 
 ```
-DEL "eth:payments:lock"
+DEL "vap:payments:lock"
 ```
 
 ## Resolving Missing Payment Entries
